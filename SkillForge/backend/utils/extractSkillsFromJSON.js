@@ -4,48 +4,67 @@ const path = require("path");
 const skillBankPath = path.join(__dirname, "../skill_bank/skills.json");
 const skillBank = JSON.parse(fs.readFileSync(skillBankPath, "utf-8"));
 
-const normalize = (text) =>
-  text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+function normalize(text) {
+  return text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
+}
 
-function extractSkillsFromText(resumeText) {
-  const resumeWords = new Set(normalize(resumeText));
-
-  let bestMatchRole = null;
-  let bestMatchCount = 0;
-  let bestMatchedSkills = [];
+function matchRole(textWords) {
+  let bestMatch = {
+    role: null,
+    matchedSkills: [],
+    score: 0,
+  };
 
   for (const role in skillBank) {
-    const { core_skills, advanced_skills, tools } = skillBank[role];
+    const { core_skills = [], advanced_skills = [], tools = [] } = skillBank[role];
     const allSkills = [...core_skills, ...advanced_skills, ...tools].map((s) =>
       s.toLowerCase()
     );
 
-    const matched = allSkills.filter((skill) => resumeWords.has(skill));
-    if (matched.length > bestMatchCount) {
-      bestMatchCount = matched.length;
-      bestMatchRole = role;
-      bestMatchedSkills = matched;
+    const matched = allSkills.filter((skill) => textWords.has(skill));
+
+    if (matched.length > bestMatch.score) {
+      bestMatch = {
+        role,
+        matchedSkills: matched,
+        score: matched.length,
+      };
     }
   }
 
-  const relevantSkills = [
-    ...skillBank[bestMatchRole].core_skills,
-    ...skillBank[bestMatchRole].advanced_skills,
-    ...skillBank[bestMatchRole].tools,
-  ];
-  const normalizedResumeWords = Array.from(resumeWords);
+  return bestMatch;
+}
 
-  const foundSkills = relevantSkills.filter((skill) =>
-    normalizedResumeWords.includes(skill.toLowerCase())
+function extractSkillsFromText(resumeText) {
+  const normalizedWords = new Set(normalize(resumeText));
+  const { role, matchedSkills } = matchRole(normalizedWords);
+
+  if (!role) {
+    return {
+      detectedRole: "Not Detected",
+      foundSkills: [],
+      missingSkills: [],
+    };
+  }
+
+  const allSkills = [
+    ...skillBank[role].core_skills,
+    ...skillBank[role].advanced_skills,
+    ...skillBank[role].tools,
+  ];
+
+  const foundSkills = allSkills.filter((skill) =>
+    normalizedWords.has(skill.toLowerCase())
   );
-  const missingSkills = relevantSkills.filter(
+
+  const missingSkills = allSkills.filter(
     (skill) => !foundSkills.includes(skill)
   );
 
   return {
-    detectedRole: bestMatchRole,
-    foundSkills,
-    missingSkills,
+    detectedRole: role,
+    foundSkills: foundSkills.sort(),
+    missingSkills: missingSkills.sort(),
   };
 }
 
