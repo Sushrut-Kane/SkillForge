@@ -9,6 +9,23 @@ const getFeedbackFromGemini = require("../utils/geminiFeedback");
 
 const router = express.Router();
 
+// Format feedback into cleaner HTML
+const formatFeedbackAsHTML = ({ detectedRole, missingSkills, summary }) => {
+  return `
+    <div class="feedback-box">
+      <h3>Detected Role: <span class="highlight">${detectedRole}</span></h3>
+
+      <h4>Missing Skills:</h4>
+      <ul class="skill-list">
+        ${missingSkills.map(skill => `<li>${skill}</li>`).join("")}
+      </ul>
+
+      <h4>Resume Feedback:</h4>
+      <p>${summary.length > 700 ? summary.slice(0, 700) + "..." : summary}</p>
+    </div>
+  `;
+};
+
 // Multer config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
@@ -28,19 +45,11 @@ router.post("/", upload.single("file"), async (req, res) => {
 
     const summary = await getFeedbackFromGemini(text);
 
-    const feedbackHTML = `
-      <div class="feedback-box">
-        <h3>Detected Role: <span class="highlight">${detectedRole}</span></h3>
-
-        <h4>Missing Skills:</h4>
-        <ul class="skill-list">
-          ${missingSkills.map((skill) => `<li>${skill}</li>`).join("")}
-        </ul>
-
-        <h4>Resume Feedback:</h4>
-        <p>${summary}</p>
-      </div>
-    `;
+    const feedbackHTML = formatFeedbackAsHTML({
+      detectedRole,
+      missingSkills,
+      summary,
+    });
 
     res.status(200).json({
       message: "Resume parsed and analyzed successfully",
