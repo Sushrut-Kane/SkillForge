@@ -19,7 +19,7 @@ function Home() {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
     setUploadMessage("");
-    setAnalysisResult(null); // Clear previous result on new file
+    setAnalysisResult(null); // Clear previous result when a new file is selected
   };
 
   const handleUpload = async (e) => {
@@ -48,9 +48,7 @@ function Home() {
     } catch (error) {
       console.error("Upload error:", error);
       setUploadMessage("❌ Upload failed");
-      alert(
-        "Upload failed: " + (error.response?.data?.message || error.message)
-      );
+      alert("Upload failed: " + (error.response?.data?.message || error.message));
     } finally {
       setIsUploading(false);
     }
@@ -72,6 +70,7 @@ function Home() {
         <input
           id="file-upload"
           type="file"
+          accept=".pdf"
           style={{ display: "none" }}
           onChange={handleFileChange}
         />
@@ -88,9 +87,8 @@ function Home() {
       {analysisResult && (
         <div className="result-section">
           <h3>Analysis Results</h3>
-
-          {/* Feedback rendered as HTML (already cleaned in backend) */}
           <div
+            className="feedback-box"
             dangerouslySetInnerHTML={{ __html: analysisResult.feedbackHTML }}
           />
         </div>
