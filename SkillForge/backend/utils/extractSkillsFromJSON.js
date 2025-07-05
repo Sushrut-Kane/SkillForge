@@ -1,71 +1,37 @@
-const fs = require("fs");
-const path = require("path");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require("dotenv").config();
 
-const skillBankPath = path.join(__dirname, "../skill_bank/skills.json");
-const skillBank = JSON.parse(fs.readFileSync(skillBankPath, "utf-8"));
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-function normalize(text) {
-  return text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
-}
+async function getFeedbackFromGemini(resumeText) {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-function matchRole(textWords) {
-  let bestMatch = {
-    role: null,
-    matchedSkills: [],
-    score: 0,
-  };
+    const prompt = `
+You are an AI resume assistant. Analyze the given resume and provide structured feedback in the following format:
+1. **Strengths** – What the user does well.
+2. **Areas to Improve** – Key skill or content gaps.
+3. **Recommendations** – Short actionable tips.
 
-  for (const role in skillBank) {
-    const { core_skills = [], advanced_skills = [], tools = [] } = skillBank[role];
-    const allSkills = [...core_skills, ...advanced_skills, ...tools].map((s) =>
-      s.toLowerCase()
-    );
+Guidelines:
+- Address the person directly (use "you", not "he"/"she").
+- Be professional and clear.
+- Avoid large paragraphs – use short, clear bullet points.
+- Do not mention you're an AI or that this is AI-generated.
 
-    const matched = allSkills.filter((skill) => textWords.has(skill));
+Resume Text:
+"""
+${resumeText}
+"""
+`.trim();
 
-    if (matched.length > bestMatch.score) {
-      bestMatch = {
-        role,
-        matchedSkills: matched,
-        score: matched.length,
-      };
-    }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Gemini API Error:", error.message);
+    return "We couldn't generate feedback at the moment. Please try again later.";
   }
-
-  return bestMatch;
 }
 
-function extractSkillsFromText(resumeText) {
-  const normalizedWords = new Set(normalize(resumeText));
-  const { role, matchedSkills } = matchRole(normalizedWords);
-
-  if (!role) {
-    return {
-      detectedRole: "Not Detected",
-      foundSkills: [],
-      missingSkills: [],
-    };
-  }
-
-  const allSkills = [
-    ...skillBank[role].core_skills,
-    ...skillBank[role].advanced_skills,
-    ...skillBank[role].tools,
-  ];
-
-  const foundSkills = allSkills.filter((skill) =>
-    normalizedWords.has(skill.toLowerCase())
-  );
-
-  const missingSkills = allSkills.filter(
-    (skill) => !foundSkills.includes(skill)
-  );
-
-  return {
-    detectedRole: role,
-    foundSkills: foundSkills.sort(),
-    missingSkills: missingSkills.sort(),
-  };
-}
-
-module.exports = extractSkillsFromText;
+module.exports = getFeedbackFromGemini;
