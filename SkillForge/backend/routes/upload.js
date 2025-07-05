@@ -9,29 +9,28 @@ const getFeedbackFromGemini = require("../utils/geminiFeedback");
 
 const router = express.Router();
 
-// Format feedback into cleaner HTML
-const formatFeedbackAsHTML = ({ detectedRole, missingSkills, summary }) => {
-  return `
-    <div class="feedback-box">
-      <h3>Detected Role: <span class="highlight">${detectedRole}</span></h3>
-
-      <h4>Missing Skills:</h4>
-      <ul class="skill-list">
-        ${missingSkills.map(skill => `<li>${skill}</li>`).join("")}
-      </ul>
-
-      <h4>Resume Feedback:</h4>
-      <p>${summary.length > 700 ? summary.slice(0, 700) + "..." : summary}</p>
-    </div>
-  `;
-};
-
-// Multer config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 const upload = multer({ storage });
+
+const formatFeedbackAsHTML = ({ detectedRole, missingSkills, summary }) => {
+  const trimmedSkills = missingSkills.slice(0, 5);
+  return `
+    <div class="feedback-box">
+      <h3>Detected Role: <span class="highlight">${detectedRole}</span></h3>
+
+      <h4>Top Missing Skills (based on your resume):</h4>
+      <ul class="skill-list">
+        ${trimmedSkills.map(skill => `<li>${skill}</li>`).join("")}
+      </ul>
+
+      <h4>Resume Feedback:</h4>
+      ${summary}
+    </div>
+  `;
+};
 
 router.post("/", upload.single("file"), async (req, res) => {
   try {
@@ -43,7 +42,21 @@ router.post("/", upload.single("file"), async (req, res) => {
 
     const { detectedRole, foundSkills, missingSkills } = extractSkillsFromText(text);
 
-    const summary = await getFeedbackFromGemini(text);
+    const aiPrompt = `
+You are a career assistant. Given this resume content, generate short structured feedback.
+- Address the person directly (use "You", not "he"/"she").
+- Avoid paragraphs. Break the feedback into:
+  1. Strengths
+  2. Areas to Improve
+  3. Recommendations
+- Avoid overexplaining each section.
+- Keep it professional and clean.
+
+Resume Content:
+"""${text}"""
+    `.trim();
+
+    const summary = await getFeedbackFromGemini(aiPrompt);
 
     const feedbackHTML = formatFeedbackAsHTML({
       detectedRole,
