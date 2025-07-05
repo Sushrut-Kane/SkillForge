@@ -1,11 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-// Load skill bank once
 const skillBankPath = path.join(__dirname, "../skill_bank/skills.json");
 const skillBank = JSON.parse(fs.readFileSync(skillBankPath, "utf-8"));
 
-// Helper to normalize words (lowercase, remove symbols)
 const normalize = (text) =>
   text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/);
 
