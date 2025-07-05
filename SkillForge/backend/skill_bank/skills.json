@@ -1,129 +1,85 @@
 {
-  "Frontend Developer": {
+  "Web Developer": {
     "core_skills": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React"
+      "html",
+      "css",
+      "javascript",
+      "git",
+      "responsive design"
     ],
     "advanced_skills": [
-      "TypeScript",
-      "Redux",
-      "Tailwind CSS",
-      "Next.js"
+      "react",
+      "typescript",
+      "redux",
+      "next.js",
+      "authentication",
+      "rest apis",
+      "websockets"
     ],
     "tools": [
-      "VS Code",
-      "Chrome DevTools",
-      "Git",
-      "Figma"
+      "vs code",
+      "chrome devtools",
+      "figma",
+      "postman",
+      "npm"
+    ],
+    "optional_skills": [
+      "tailwind css",
+      "bootstrap",
+      "material ui"
     ]
   },
-  "Backend Developer": {
-    "core_skills": [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "SQL"
-    ],
-    "advanced_skills": [
-      "Authentication",
-      "REST APIs",
-      "WebSockets",
-      "Microservices"
-    ],
-    "tools": [
-      "Postman",
-      "Git",
-      "Docker"
-    ]
-  },
-  "Full Stack Developer": {
-    "core_skills": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React",
-      "Node.js",
-      "Express.js",
-      "MongoDB"
-    ],
-    "advanced_skills": [
-      "TypeScript",
-      "Next.js",
-      "Authentication",
-      "CI/CD",
-      "Cloud Deployment"
-    ],
-    "tools": [
-      "VS Code",
-      "Git",
-      "Postman",
-      "Docker",
-      "Figma"
-    ]
-  },
+
   "Machine Learning Engineer": {
     "core_skills": [
-      "Python",
-      "Numpy",
-      "Pandas",
-      "Matplotlib",
-      "Scikit-learn"
+      "python",
+      "numpy",
+      "pandas",
+      "scikit-learn",
+      "matplotlib"
     ],
     "advanced_skills": [
-      "TensorFlow",
-      "PyTorch",
-      "Deep Learning",
-      "NLP",
-      "Model Deployment"
+      "deep learning",
+      "pytorch",
+      "tensorflow",
+      "model deployment",
+      "nlp",
+      "ml algorithms"
     ],
     "tools": [
-      "Jupyter",
-      "Google Colab",
-      "Git"
+      "jupyter",
+      "google colab",
+      "docker"
+    ],
+    "optional_skills": [
+      "mlflow",
+      "fastapi",
+      "flask"
     ]
   },
-  "Data Scientist": {
-    "core_skills": [
-      "Python",
-      "SQL",
-      "Pandas",
-      "Matplotlib",
-      "Statistics"
-    ],
-    "advanced_skills": [
-      "Data Visualization",
-      "Hypothesis Testing",
-      "ML Algorithms",
-      "Big Data",
-      "Spark"
-    ],
-    "tools": [
-      "Tableau",
-      "Excel",
-      "Jupyter",
-      "Git"
-    ]
-  },
+
   "Cybersecurity Analyst": {
     "core_skills": [
-      "Linux",
-      "Networking",
-      "Python",
-      "Cryptography"
+      "linux",
+      "networking",
+      "cryptography",
+      "incident response"
     ],
     "advanced_skills": [
-      "Ethical Hacking",
-      "Vulnerability Assessment",
-      "SIEM Tools",
-      "Incident Response"
+      "ethical hacking",
+      "vulnerability assessment",
+      "siem tools",
+      "penetration testing"
     ],
     "tools": [
-      "Wireshark",
-      "Nmap",
-      "Kali Linux",
-      "Burp Suite"
+      "wireshark",
+      "nmap",
+      "kali linux",
+      "burp suite"
+    ],
+    "optional_skills": [
+      "metasploit",
+      "splunk"
     ]
   }
 }
