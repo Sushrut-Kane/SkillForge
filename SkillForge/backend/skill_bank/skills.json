@@ -1,0 +1,129 @@
+{
+  "Frontend Developer": {
+    "core_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React"
+    ],
+    "advanced_skills": [
+      "TypeScript",
+      "Redux",
+      "Tailwind CSS",
+      "Next.js"
+    ],
+    "tools": [
+      "VS Code",
+      "Chrome DevTools",
+      "Git",
+      "Figma"
+    ]
+  },
+  "Backend Developer": {
+    "core_skills": [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "SQL"
+    ],
+    "advanced_skills": [
+      "Authentication",
+      "REST APIs",
+      "WebSockets",
+      "Microservices"
+    ],
+    "tools": [
+      "Postman",
+      "Git",
+      "Docker"
+    ]
+  },
+  "Full Stack Developer": {
+    "core_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB"
+    ],
+    "advanced_skills": [
+      "TypeScript",
+      "Next.js",
+      "Authentication",
+      "CI/CD",
+      "Cloud Deployment"
+    ],
+    "tools": [
+      "VS Code",
+      "Git",
+      "Postman",
+      "Docker",
+      "Figma"
+    ]
+  },
+  "Machine Learning Engineer": {
+    "core_skills": [
+      "Python",
+      "Numpy",
+      "Pandas",
+      "Matplotlib",
+      "Scikit-learn"
+    ],
+    "advanced_skills": [
+      "TensorFlow",
+      "PyTorch",
+      "Deep Learning",
+      "NLP",
+      "Model Deployment"
+    ],
+    "tools": [
+      "Jupyter",
+      "Google Colab",
+      "Git"
+    ]
+  },
+  "Data Scientist": {
+    "core_skills": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "Matplotlib",
+      "Statistics"
+    ],
+    "advanced_skills": [
+      "Data Visualization",
+      "Hypothesis Testing",
+      "ML Algorithms",
+      "Big Data",
+      "Spark"
+    ],
+    "tools": [
+      "Tableau",
+      "Excel",
+      "Jupyter",
+      "Git"
+    ]
+  },
+  "Cybersecurity Analyst": {
+    "core_skills": [
+      "Linux",
+      "Networking",
+      "Python",
+      "Cryptography"
+    ],
+    "advanced_skills": [
+      "Ethical Hacking",
+      "Vulnerability Assessment",
+      "SIEM Tools",
+      "Incident Response"
+    ],
+    "tools": [
+      "Wireshark",
+      "Nmap",
+      "Kali Linux",
+      "Burp Suite"
+    ]
+  }
+}
