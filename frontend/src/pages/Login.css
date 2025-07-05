@@ -1,0 +1,101 @@
+/* Whole login page background */
+.login-page {
+  background-color: #1C1C1C; /* Optional dark background */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Login box styling */
+.login-box {
+  background-color: #000000; /* Pure black */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 400px;
+  color: #ffffff; /* All text inside is white */
+}
+.login-box:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+/* Heading */
+.login-box h2 {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Form inputs */
+.login-form input {
+  width: 90%;
+  padding: 12px 16px;
+  margin-bottom: 1rem;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #cccccc;
+}
+
+/* Login Button */
+.login-form button {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #FFD700; /* Yellow */
+  color: #000000; /* Text inside button = black */
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #8d7700; /* Slightly darker yellow on hover */
+}
+
+/* Signup link section */
+.signup-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #ffffff; /* "New here?" text = white */
+}
+
+/* Sign up link itself */
+.signup-link a {
+  color: #FFD700; /* Yellow link */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+.signup-link {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 1rem;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.login-box:hover {
+  animation: float 2s infinite;
+}

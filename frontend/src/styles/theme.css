@@ -1,0 +1,17 @@
+:root {
+  --primary-bg: #0f172a;
+  --primary-text: #f8fafc;
+  --accent-color: #3b82f6;
+  --navbar-bg: #1e293b;
+}
+
+body {
+  margin: 0;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+a {
+  color: var(--accent-color);
+}

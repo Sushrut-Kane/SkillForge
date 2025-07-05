@@ -1,0 +1,78 @@
+/* Signup Page Wrapper */
+.signup-page {
+  background-color: #1C1C1C;  /* Same dark background */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Signup Box */
+.signup-box {
+  background-color: #000000; /* Pure black box */
+  padding: 2.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 400px;
+  color: #ffffff; /* White text inside */
+}
+
+/* Header */
+.signup-box h2 {
+  color: #ffffff; /* White heading */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Inputs */
+.signup-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box; 
+}
+
+
+.signup-form input::placeholder {
+  color: #aaa;
+}
+
+/* Signup Button */
+.signup-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #FFD700; /* Yellow button */
+  color: #000000;            /* Black text inside */
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup-form button:hover {
+  background-color: #e6c200; /* Slightly darker yellow */
+}
+
+/* Link Section */
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: #ffffff;
+}
+
+.login-link a {
+  color: #FFD700; /* Yellow link */
+  text-decoration: none;
+  font-weight: bold;
+}
+.login-link a:hover {
+  text-decoration: underline;
+}
